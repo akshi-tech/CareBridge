@@ -1,654 +1,83 @@
-<<<<<<< HEAD
 # CareBridge
-=======
-# CareBridge Health
 
-Build a complete full-stack web application called "CareBridge".
+> From symptoms to continuity of care.
 
-PRODUCT:
+CareBridge is a continuity-of-care web app that helps people organise their health information over time. Users can track symptoms, review rule-based safety checks, follow a monitoring plan, and prepare a concise summary for a healthcare professional.
 
-CareBridge is a continuity-of-care platform that helps users:
+**CareBridge is not a diagnostic tool and does not prescribe medication.** Its purpose is to make health information clearer and easier to share with a qualified clinician.
 
-1. Track symptoms
+## Features
 
-2. Structure their health information
+- **Symptom tracking** — record symptoms, severity, duration, and changes over time.
+- **AI-assisted organisation** — converts a user’s description into structured symptom information and summaries. The AI is not used to diagnose.
+- **Deterministic safety checks** — applies fixed red-flag rules for cough, sore throat, and common cold symptoms. AI cannot override these rules.
+- **Care plans** — shows what to monitor, self-care guidance, things to avoid, expected improvement, and follow-up timing.
+- **Health timeline** — keeps symptom updates, self-care, medication, follow-up, and clinician-visit events in one place.
+- **Medication tracking** — records medications and dose status.
+- **Doctor summary** — creates a copyable and downloadable overview for a healthcare appointment.
+- **Care circle and records** — helps organise health records and trusted support contacts.
 
-3. Understand what to monitor
+## Care journey
 
-4. Check safety red flags
+`Track → Understand → Monitor → Follow-up`
 
-5. Maintain a longitudinal health timeline
+1. Describe what you are experiencing.
+2. Review the organised symptom information and safety result.
+3. Monitor the care plan and timeline.
+4. Share a clear follow-up summary with a healthcare professional.
 
-6. Prepare a concise follow-up summary for a healthcare professional
+## Safety approach
 
-IMPORTANT:
+CareBridge uses deterministic rules to identify potential red flags. Results are shown in three levels:
 
-CareBridge must NOT diagnose diseases.
+- **Low** — home care and monitoring.
+- **Review** — consider professional medical review.
+- **Urgent** — seek professional medical evaluation.
 
-CareBridge must NOT prescribe medication.
+For urgent symptoms or an emergency, contact local emergency services or a qualified healthcare professional directly. Do not rely on this app in place of medical advice.
 
-CareBridge must NOT claim that a user is cured.
+## Technology
 
-The AI should organize and summarize information.
+- React and TypeScript
+- TanStack Start and TanStack Router
+- Vite and Tailwind CSS
+- shadcn/ui and Lucide icons
+- Supabase (PostgreSQL, authentication, and server functionality)
+- OpenAI API for constrained symptom extraction and summarisation
 
-Safety escalation must be controlled by deterministic rules, not by the LLM.
+## Run locally
 
-TAGLINE:
+### Prerequisites
 
-"From Symptoms to Continuity of Care"
+- Node.js 20 or newer
+- npm
+- A Supabase project and the required environment configuration
 
-CORE JOURNEY:
+### Installation
 
-Track → Understand → Monitor → Follow-up
-
-TECH STACK:
-
-Frontend:
-
-- React / TypeScript
-
-- Tailwind CSS
-
-- shadcn/ui
-
-- Lucide icons
-
-- Responsive desktop + mobile UI
-
-- Modern healthcare SaaS design
-
-Backend:
-
-- Supabase
-
-- PostgreSQL
-
-- Supabase Auth
-
-- Supabase Edge Functions where needed
-
-AI:
-
-- OpenAI API
-
-- AI only for natural language symptom extraction and summarization
-
-- Never allow AI to make a definitive diagnosis
-
-DATABASE TABLES:
-
-users
-
-symptom_entries
-
-conditions
-
-care_plans
-
-timeline_events
-
-medications
-
-medication_logs
-
-followups
-
-USER TABLE:
-
-id
-
-name
-
-email
-
-date_of_birth
-
-gender
-
-blood_group
-
-created_at
-
-SYMPTOM_ENTRIES:
-
-id
-
-user_id
-
-symptom_name
-
-severity
-
-duration_days
-
-started_at
-
-description
-
-created_at
-
-CONDITIONS:
-
-id
-
-category
-
-name
-
-symptoms
-
-self_care
-
-expected_improvement
-
-avoid
-
-red_flags
-
-care_level
-
-evidence_source
-
-created_at
-
-CARE_PLANS:
-
-id
-
-user_id
-
-condition_id
-
-risk_level
-
-status
-
-started_at
-
-follow_up_at
-
-notes
-
-TIMELINE_EVENTS:
-
-id
-
-user_id
-
-care_plan_id
-
-event_type
-
-title
-
-description
-
-severity
-
-event_date
-
-MEDICATIONS:
-
-id
-
-user_id
-
-name
-
-dosage
-
-frequency
-
-start_date
-
-end_date
-
-instructions
-
-MEDICATION_LOGS:
-
-id
-
-medication_id
-
-scheduled_at
-
-taken_at
-
-status
-
-FOLLOWUPS:
-
-id
-
-user_id
-
-care_plan_id
-
-scheduled_for
-
-status
-
-notes
-
-created_at
-
-PAGES:
-
-1. Landing Page
-
-2. Login
-
-3. Register
-
-4. Dashboard
-
-5. Symptom Tracker
-
-6. New Symptom Entry
-
-7. AI Symptom Analysis
-
-8. Safety Check
-
-9. Care Plan
-
-10. Health Timeline
-
-11. Medications
-
-12. Health Records
-
-13. Doctor Summary
-
-14. Care Circle
-
-15. Settings
-
-DASHBOARD:
-
-Create a premium healthcare dashboard.
-
-Left sidebar:
-
-- CareBridge logo
-
-- Dashboard
-
-- My Care
-
-- Symptom Tracker
-
-- Care Plans
-
-- Timeline
-
-- Medications
-
-- Health Records
-
-- Care Circle
-
-- Doctor Summary
-
-- Settings
-
-Main dashboard:
-
-- Greeting
-
-- Current health overview
-
-- Active concerns
-
-- Follow-up reminders
-
-- Medication status
-
-- Recent timeline
-
-- Quick action buttons
-
-- Care journey progress
-
-Use clean cards, subtle shadows, rounded corners and strong spacing.
-
-SYMPTOM INPUT:
-
-Create a large natural language input:
-
-"Tell us what you're experiencing"
-
-Example:
-
-"I've had a cough for four days and my throat feels irritated. It was worse yesterday but feels slightly better today."
-
-Button:
-
-"Analyze My Symptoms"
-
-Show animated processing steps:
-
-Understanding your description
-
-↓
-
-Identifying symptoms
-
-↓
-
-Checking safety
-
-↓
-
-Building your care journey
-
-AI OUTPUT:
-
-Return structured JSON:
-
-{
-
-  symptoms: [
-
-    {
-
-      name: "",
-
-      severity: null,
-
-      duration_days: null
-
-    }
-
-  ],
-
-  associated_symptoms: [],
-
-  red_flags_present: [],
-
-  missing_safety_questions: [],
-
-  summary: ""
-
-}
-
-Never invent symptoms.
-
-SAFETY ENGINE:
-
-Create deterministic safety rules.
-
-For cough:
-
-red flags:
-
-- breathing difficulty
-
-- chest pain
-
-- coughing blood
-
-For sore throat:
-
-red flags:
-
-- difficulty breathing
-
-- difficulty swallowing
-
-- drooling
-
-- rapidly worsening symptoms
-
-For common cold:
-
-red flags:
-
-- breathing difficulty
-
-- chest pain
-
-- confusion
-
-- blood-stained phlegm
-
-If red flag is present:
-
-risk_level = URGENT
-
-If symptom persists beyond configured threshold:
-
-risk_level = REVIEW
-
-Otherwise:
-
-risk_level = LOW
-
-The AI must never override the safety engine.
-
-SAFETY RESULT UI:
-
-LOW:
-
-"Home care + monitoring"
-
-REVIEW:
-
-"Consider professional medical review"
-
-URGENT:
-
-"Seek professional medical evaluation"
-
-Display:
-
-- Risk level
-
-- Why this result
-
-- Safety checks performed
-
-- What to monitor
-
-- When to seek professional help
-
-CARE PLAN:
-
-Show:
-
-- Current concern
-
-- What to monitor
-
-- Self-care information
-
-- Things to avoid
-
-- Expected improvement
-
-- Safety warnings
-
-- Follow-up date
-
-TIMELINE:
-
-Create beautiful vertical health timeline.
-
-Events:
-
-- Symptom started
-
-- Symptom update
-
-- Self-care
-
-- Medication
-
-- Follow-up
-
-- Doctor visit
-
-- Resolved
-
-Include symptom severity graph from 0-10.
-
-DOCTOR SUMMARY:
-
-Create a professional summary card.
-
-Sections:
-
-Primary concern
-
-Started
-
-Duration
-
-Current trend
-
-Associated symptoms
-
-Red flags
-
-Self-care tried
-
-Medications
-
-Questions to discuss
-
-Buttons:
-
-"Copy Summary"
-
-"Download Summary"
-
-DESIGN:
-
-Premium healthcare startup aesthetic.
-
-Use:
-
-- White background
-
-- Soft blue/teal accents
-
-- Dark navy text
-
-- Green for safe
-
-- Amber for review
-
-- Red only for urgent states
-
-Do NOT make it look like a generic hospital website.
-
-Make it look like a modern AI healthcare SaaS product.
-
-Use:
-
-- Inter font
-
-- Lucide icons
-
-- subtle gradients
-
-- glassmorphism only where appropriate
-
-- excellent responsive design
-
-- loading states
-
-- empty states
-
-- error states
-
-- toast notifications
-
-- smooth transitions
-
-DEMO DATA:
-
-Create demo user:
-
-Aryan Jaiswal
-
-Create a demo active concern:
-
-"Mild cough"
-
-Duration:
-
-4 days
-
-Severity:
-
-4/10
-
-Trend:
-
-Improving
-
-Associated symptom:
-
-Throat irritation
-
-No red flags.
-
-Create timeline events showing:
-
-Day 1 symptom started
-
-Day 2 symptom update
-
-Day 3 self-care
-
-Day 4 improving
-
-Create a doctor summary based on this demo data.
-
-IMPORTANT:
-
-The application must actually work end-to-end.
-
-Do not create fake buttons.
-
-All major buttons should perform real actions.
-
-Connect frontend to Supabase.
-
-Create database schema.
-
-Create API/server functions where needed.
-
-Create authentication.
-
-Create loading and error states.
-
-Make the application deployable.
-
-Prioritize a polished working MVP over unnecessary features.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://carebridge-health-journey.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/82bdda8c-e4a8-48d2-9981-c645877934a4).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+git clone https://github.com/akshi-tech/CareBridge.git
+cd CareBridge
+npm install
 npm run dev
 ```
->>>>>>> 49d6a72 (Initial commit)
+
+Open the local URL shown in the terminal, usually `http://localhost:5173`.
+
+## Available commands
+
+```bash
+npm run dev       # Start the local development server
+npm run build     # Create a production build
+npm run preview   # Preview the production build
+npm run lint      # Check the code for linting issues
+npm run format    # Format the code with Prettier
+```
+
+## Database
+
+Supabase configuration and database migrations are in [`supabase/`](supabase/). The data model supports users, symptom entries, care plans, timeline events, medications, medication logs, and follow-ups.
+
+## Disclaimer
+
+CareBridge provides health-information organisation and safety guidance only. It does not diagnose, treat, cure, or prevent any disease, and it is not a substitute for professional medical advice, diagnosis, or treatment.
