@@ -81,3 +81,13 @@ Supabase configuration and database migrations are in [`supabase/`](supabase/). 
 ## Disclaimer
 
 CareBridge provides health-information organisation and safety guidance only. It does not diagnose, treat, cure, or prevent any disease, and it is not a substitute for professional medical advice, diagnosis, or treatment.
+
+//////////////////////////////////////////////////////////////
+Desgin by Akshi🌸
+
+
+
+
+
+
+
